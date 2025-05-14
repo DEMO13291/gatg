@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GET ON GORILLA TAG!!!!!!</title>
+  <style>
+    body {
+      background: black;
+      color: red;
+      font-family: Impact, Charcoal, sans-serif;
+      text-align: center;
+      padding: 50px;
+      overflow-y: scroll; /* Allows scrolling */
+      height: 100vh; /* Ensure it takes full viewport height */
+      position: relative; /* Required for absolute positioning of "Made By DEMO" */
+    }
+
+    .shaking-text {
+      font-size: 3em;
+      animation: shake 0.5s infinite;
+      margin: 10px 0;
+      display: inline-block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .biggest {
+      font-size: 8em;
+      color: red;
+      animation: rage 0.5s infinite; /* More intense shaking for the first line */
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    @keyframes rage {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      25% { transform: translate(-5px, -5px) rotate(-10deg); }
+      50% { transform: translate(5px, 5px) rotate(10deg); }
+      75% { transform: translate(-5px, 5px) rotate(-10deg); }
+      100% { transform: translate(1px, -1px) rotate(0deg); }
+    }
+
+    .color1 { color: red; }
+    .color2 { color: lime; }
+    .color3 { color: blue; }
+    .color4 { color: orange; }
+    .color5 { color: yellow; }
+    .color6 { color: pink; }
+    .color7 { color: purple; }
+
+    /* Position "Made By DEMO" in the top-left corner */
+    #made-by-demo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      font-size: 1.5em;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="made-by-demo">Made By DEMO</div> <!-- "Made By DEMO" in top-left corner -->
+  <div id="get-on-tag" class="biggest">GET ON GORILLA TAG!!!!!!</div> <!-- First thing visible -->
+  <div id="countdown"></div>
+  <div id="message" class="hidden">GET ON VR!!!</div>
+  
+  <div id="text"></div> <!-- Div for showing the text lines -->
+
+  <script>
+    let timeLeft = 5;
+    const countdown = document.getElementById('countdown');
+    const message = document.getElementById('message');
+    const textDiv = document.getElementById('text');
+    const getOnTag = document.getElementById('get-on-tag'); // "GET ON GORILLA TAG!!!!!!" div
+
+    // Lines of text to show with different colors
+    const textLines = [
+      "GET ON VR!!!",
+      "NOW!!",
+      "LET'S GO!",
+      "DO IT NOW!",
+      "HURRY UP!",
+      "TIME'S RUNNING OUT!"
+    ];
+
+    const colors = ["color1", "color2", "color3", "color4", "color5", "color6", "color7"];
+
+    // Function to start the countdown after "GET ON GORILLA TAG!!!!!!"
+    function startCountdown() {
+      countdown.style.fontSize = '3em';
+      countdown.textContent = timeLeft;
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        countdown.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          countdown.textContent = '';
+          
+          // Start showing the text after countdown ends
+          showText();
+        }
+      }, 1000);
+    }
+
+    // Function to show text one by one in a loop
+    function showText() {
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < textLines.length) {
+          const span = document.createElement("span");
+          span.textContent = textLines[i];
+          span.classList.add("shaking-text", colors[i % colors.length]);
+          textDiv.appendChild(span);
+          textDiv.appendChild(document.createElement("br")); // New line for each message
+          i++;
+        } else {
+          // Loop back to the start
+          textDiv.innerHTML = ''; // Clear previous text
+          i = 0; // Reset index
+        }
+      }, 1000); // Show each line every 1 second
+    }
+
+    // Wait for the page to load, then show the "GET ON GORILLA TAG!!!!!!" text
+    window.onload = function() {
+      setTimeout(() => {
+        getOnTag.style.display = 'block'; // Show "GET ON GORILLA TAG!!!!!!"
+        setTimeout(() => {
+          startCountdown(); // Start the countdown after "GET ON GORILLA TAG!!!!!!"
+        }, 1000); // Wait 1 second after displaying the first message
+      }, 500); // Wait 0.5 second before displaying "GET ON GORILLA TAG!!!!!!"
+    };
+  </script>
+</body>
+</html>
